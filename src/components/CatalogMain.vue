@@ -6,6 +6,7 @@
                 v-for="product in products"
                 :key="product.article"
                 :product_data="product"
+                @sendArticle="showArticle"
             />
         </div>
     </div>
@@ -103,6 +104,11 @@ export default {
                     quantity: 1
                 }
             ]
+        }
+    },
+    methods: {
+        showArticle(data) {
+            console.log(data);
         }
     }
 }

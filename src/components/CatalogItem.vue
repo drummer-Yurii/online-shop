@@ -5,7 +5,12 @@
         </div>
         <p class="catalog-item__name">{{ product_data.name }}</p>
         <p class="catalog-item__price">{{ product_data.price }} UAH</p>
-        <button class="catalog-item__btn">Add to cart</button>
+        <button 
+            class="catalog-item__btn"
+            @click="addToCart"
+        >
+            Add to cart
+        </button>
     </div>
 </template>
 
@@ -19,6 +24,11 @@ export default {
             default() {
                 return {}
             }
+        }
+    },
+    methods: {
+        addToCart() {
+            this.$emit('sendArticle', this.product_data.article)
         }
     }
 }

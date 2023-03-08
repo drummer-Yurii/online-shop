@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <div>Hello</div>
     <catalog-wrapper/>
   </div>
 </template>

@@ -1,6 +1,5 @@
 <template>
     <div class="catalog-wrapper">
-        <p>{{ title }}</p>
         <catalog-main></catalog-main>
         <catalog-cart></catalog-cart>
     </div>
@@ -18,15 +17,12 @@ export default {
     props: {},
     data() {
         return {
-            title: 'Main Wrapper'
+            
         }
     },
     computed: {},
     methods: {},
-    watch: {},
-    mounted() {
-        console.log('I like Vue');
-    }
+    watch: {}
 }
 </script>
 

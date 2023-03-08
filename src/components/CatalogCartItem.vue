@@ -12,7 +12,7 @@
             <p>Qty:</p>
             <p>{{ cart_item_data.quantity }}</p>
         </div>
-        <button>Delete</button>
+        <button @click="deleteFromCart">Delete</button>
     </div>
 </template>
 
@@ -26,6 +26,11 @@ export default {
             default() {
                 return {}
             }
+        }
+    },
+    methods: {
+        deleteFromCart() {
+            this.$emit('deleteFromCart')
         }
     }
 }

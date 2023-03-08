@@ -3,7 +3,7 @@
         <h1>Catalog</h1>
         <div class="catalog__list">
             <catalog-item 
-                v-for="product in products"
+                v-for="product in PRODUCTS"
                 :key="product.article"
                 :product_data="product"
                 @sendArticle="showArticle"
@@ -14,6 +14,7 @@
 
 <script>
 import CatalogItem from './CatalogItem.vue'
+import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'CatalogMain',
     components: {
@@ -21,95 +22,24 @@ export default {
     },
     data() {
         return {
-            products: [
-                {
-                    image: "1.jpg",
-                    name: "T-shirt 1",
-                    price: 1500,
-                    article: "T1",
-                    available: true,
-                    category: "Male",
-                    quantity: 1
-                },
-                {
-                    image: "2.jpg",
-                    name: "T-shirt 2",
-                    price: 1200,
-                    article: "T2",
-                    available: true,
-                    category: "Female",
-                    quantity: 1
-                },
-                {
-                    image: "3.jpg",
-                    name: "T-shirt 3",
-                    price: 980,
-                    article: "T3",
-                    available: false,
-                    category: "Female",
-                    quantity: 1
-                },
-                {
-                    image: "4.jpg",
-                    name: "T-shirt 4",
-                    price: 1680,
-                    article: "T4",
-                    available: true,
-                    category: "Male",
-                    quantity: 1
-                },
-                {
-                    image: "5.jpg",
-                    name: "T-shirt 5",
-                    price: 1900,
-                    article: "T5",
-                    available: false,
-                    category: "Female",
-                    quantity: 1
-                },
-                {
-                    image: "6.jpg",
-                    name: "T-shirt 6",
-                    price: 1799,
-                    article: "T6",
-                    available: true,
-                    category: "Female",
-                    quantity: 1
-                },
-                {
-                    image: "7.jpg",
-                    name: "T-shirt 7",
-                    price: 1399,
-                    article: "T7",
-                    available: true,
-                    category: "Male",
-                    quantity: 1
-                },
-                {
-                    image: "8.jpg",
-                    name: "T-shirt 8",
-                    price: 1449,
-                    article: "T8",
-                    available: true,
-                    category: "Female",
-                    quantity: 1
-                },
-                {
-                    image: "9.jpg",
-                    name: "T-shirt 9",
-                    price: 999,
-                    article: "T9",
-                    available: true,
-                    category: "Female",
-                    quantity: 1
-                }
-            ]
+           
         }
     },
+    computed: {
+        ...mapGetters([
+            'PRODUCTS'
+        ])
+    },
     methods: {
+        ...mapActions([
+            'GET_PRODUCTS_FROM_API'
+        ]),
         showArticle(data) {
             console.log(data);
         }
+    },
+    mounted() {
+        this.GET_PRODUCTS_FROM_API()
     }
 }
 </script>

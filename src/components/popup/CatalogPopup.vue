@@ -1,5 +1,5 @@
 <template>
-    <div class="catalog-popup__wrapper">
+    <div class="catalog-popup__wrapper" ref="popup_wrapper">
         <div class="catalog-popup">
             <div class="catalog-popup__header">
                 <span>{{popupTitle}}</span>
@@ -22,7 +22,12 @@
                 >
                     Close
                 </button>
-                <button class="btn">{{ rightBtnPopup }}</button>
+                <button 
+                    class="btn"
+                    @click="rightBtnAction"
+                >
+                    {{ rightBtnPopup }}
+                </button>
             </div>
         </div>
     </div>
@@ -34,6 +39,9 @@ export default {
     methods: {
         closePopup() {
             this.$emit('closePopup')
+        },
+        rightBtnAction() {
+            this.$emit('rightBtnAction')
         }
     },
     props: {
@@ -45,6 +53,14 @@ export default {
             type: String,
             default: 'Popup name'
         }
+    },
+    mounted() {
+        let c = this;
+        document.addEventListener('click', function(item) {
+            if (item.target === c.$refs['popup_wrapper']) {
+                c.closePopup()
+            }
+        })
     }
 }
 </script>

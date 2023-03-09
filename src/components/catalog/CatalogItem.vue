@@ -5,6 +5,7 @@
             right-btn-popup="Add to cart" 
             :popupTitle="product_data.name"
             @closePopup="closePopup"
+            @rightBtnAction="addToCart"
         >
             <div class="catalog-item__popup">
                 <div class="catalog-item__image-wrap">

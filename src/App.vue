@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CatalogWrapper from './components/CatalogWrapper.vue'
+import CatalogWrapper from './components/catalog/CatalogWrapper.vue'
 
 export default {
   name: 'App',

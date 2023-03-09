@@ -1,6 +1,11 @@
 <template>
     <div class="catalog-item">
-        <catalog-popup v-if="isPopupVisible" @closePopup="closePopup">
+        <catalog-popup 
+            v-if="isPopupVisible"
+            right-btn-popup="Add to cart" 
+            :popupTitle="product_data.name"
+            @closePopup="closePopup"
+        >
             <div class="catalog-item__popup">
                 <div class="catalog-item__image-wrap">
                     <img class="catalog-item__image" :src="require('../../assets/images/' + product_data.image)" alt="">

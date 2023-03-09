@@ -2,7 +2,7 @@
     <div class="catalog-popup__wrapper">
         <div class="catalog-popup">
             <div class="catalog-popup__header">
-                <span>Title</span>
+                <span>{{popupTitle}}</span>
                 <span>
                     <i 
                         class="material-icons catalog-popup__icon"
@@ -22,7 +22,7 @@
                 >
                     Close
                 </button>
-                <button class="btn">Add to cart</button>
+                <button class="btn">{{ rightBtnPopup }}</button>
             </div>
         </div>
     </div>
@@ -34,6 +34,16 @@ export default {
     methods: {
         closePopup() {
             this.$emit('closePopup')
+        }
+    },
+    props: {
+        rightBtnPopup: {
+            type: String,
+            default: 'Ok'
+        },
+        popupTitle: {
+            type: String,
+            default: 'Popup name'
         }
     }
 }

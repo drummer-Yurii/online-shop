@@ -5,11 +5,13 @@
             :key="item.article"
             :cart_item_data="item"
             @deleteFromCart="deleteFromCart(index)"
+            @incrementItem="incrementItem(index)"
+            @decrementItem="decrementItem(index)"
         />
     </div>
     <div class="cart-item-wrapper__total">
         <p class="cart-item-wrapper__total-title">Total:</p>
-        <p>{{ cartTotalCost }}</p>
+        <p>{{ cartTotalCost }} UAH</p>
     </div>
 </template>
 
@@ -31,8 +33,16 @@ export default {
     },
     methods: {
         ...mapActions([
-            'DELETE_FROM_CART'
+            'DELETE_FROM_CART',
+            'INCREMENT_CART_ITEM',
+            'DECREMENT_CART_ITEM'
         ]),
+        decrementItem(index) {
+            this.DECREMENT_CART_ITEM(index)
+        },
+        incrementItem(index) {
+            this.INCREMENT_CART_ITEM(index)
+        },
         deleteFromCart(index) {
             this.DELETE_FROM_CART(index)
         }

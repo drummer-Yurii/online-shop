@@ -4,14 +4,24 @@
             <div class="catalog-popup__header">
                 <span>Title</span>
                 <span>
-                    <i class="material-icons">close</i>
+                    <i 
+                        class="material-icons catalog-popup__icon"
+                        @click="closePopup"
+                    >
+                        close
+                    </i>
                 </span>
             </div>
             <div class="catalog-popup__content">
                 <slot></slot>
             </div>
             <div class="catalog-popup__footer">
-                <button class="btn">Close</button>
+                <button 
+                    @click="closePopup" 
+                    class="btn catalog-popup__close"
+                >
+                    Close
+                </button>
                 <button class="btn">Add to cart</button>
             </div>
         </div>
@@ -20,7 +30,12 @@
 
 <script>
 export default {
-    name: 'CatalogPopup'
+    name: 'CatalogPopup',
+    methods: {
+        closePopup() {
+            this.$emit('closePopup')
+        }
+    }
 }
 </script>
 
@@ -57,6 +72,15 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    &__icon {
+        cursor: pointer;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+    &__close.btn {
+        background-color: $color-btn;
     }
 }
 </style>

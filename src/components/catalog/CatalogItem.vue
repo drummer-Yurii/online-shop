@@ -1,10 +1,16 @@
 <template>
     <div class="catalog-item">
-        <catalog-popup
-            v-if="isPopupVisible"
-            @closePopup="closePopup"
-        >
-
+        <catalog-popup v-if="isPopupVisible" @closePopup="closePopup">
+            <div class="catalog-item__popup">
+                <div class="catalog-item__image-wrap">
+                    <img class="catalog-item__image" :src="require('../../assets/images/' + product_data.image)" alt="">
+                </div>
+                <div class="catalog-item__content">
+                    <p class="catalog-item__name">{{ product_data.name }}</p>
+                    <p class="catalog-item__price">{{ product_data.price }} UAH</p>
+                    <p class="catalog-item__price">{{ product_data.category }}</p>
+                </div>
+            </div>
         </catalog-popup>
         <div class="catalog-item__image-wrap">
             <img class="catalog-item__image" :src="require('../../assets/images/' + product_data.image)" alt="">
@@ -12,10 +18,7 @@
         <p class="catalog-item__name">{{ product_data.name }}</p>
         <p class="catalog-item__price">{{ product_data.price }} UAH</p>
         <div class="catalog-item__btns">
-            <button 
-                class="catalog-item__show-info btn"
-                @click="showPopup"
-            >
+            <button class="catalog-item__show-info btn" @click="showPopup">
                 Show info
             </button>
             <button class="catalog-item__btn btn" @click="addToCart">
@@ -87,6 +90,7 @@ export default {
     &__show-info.btn {
         background-color: $main-color;
     }
+
     &__btns {
         display: flex;
         flex-direction: column;
@@ -94,6 +98,14 @@ export default {
         align-items: stretch;
         margin: 0 $margin*3;
         gap: $padding;
+    }
+    &__popup {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    &__content {
+        padding-left: $padding;
     }
 }
 </style>

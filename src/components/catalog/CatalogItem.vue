@@ -5,9 +5,14 @@
         </div>
         <p class="catalog-item__name">{{ product_data.name }}</p>
         <p class="catalog-item__price">{{ product_data.price }} UAH</p>
-        <button class="catalog-item__btn btn" @click="addToCart">
-            Add to cart
-        </button>
+        <div class="catalog-item__btns">
+            <button class="catalog-item__show-info btn">
+                Show info
+            </button>
+            <button class="catalog-item__btn btn" @click="addToCart">
+                Add to cart
+            </button>
+        </div>
     </div>
 </template>
 
@@ -54,6 +59,18 @@ export default {
         object-position: center;
         width: 100%;
         height: 100%;
+    }
+
+    &__show-info.btn {
+        background-color: $main-color;
+    }
+    &__btns {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        margin: 0 $margin*3;
+        gap: $padding;
     }
 }
 </style>

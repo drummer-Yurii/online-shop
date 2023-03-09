@@ -5,9 +5,14 @@
         </router-link>
         
         <h1>Catalog</h1>
+        <catalog-select 
+            :options="categories"
+            :selected="selected"
+            @select="sortByCategories"
+        />
         <div class="catalog__list">
             <catalog-item 
-                v-for="product in PRODUCTS"
+                v-for="product in filteredProducts"
                 :key="product.article"
                 :product_data="product"
                 @addToCart="addToCart"
@@ -17,23 +22,38 @@
 </template>
 
 <script>
-import CatalogItem from './CatalogItem.vue'
+import CatalogItem from './CatalogItem.vue';
+import CatalogSelect from './CatalogSelect.vue';
 import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'CatalogMain',
     components: {
-        CatalogItem
+        CatalogItem,
+        CatalogSelect
     },
     data() {
         return {
-           
+           categories: [
+                {name: 'All', value: 'All'},
+                {name: 'Male', value: 'M'},
+                {name: 'Female', value: 'F'},
+           ],
+           sortedProducts: [],
+           selected: 'All'
         }
     },
     computed: {
         ...mapGetters([
             'PRODUCTS',
             'CART'
-        ])
+        ]),
+        filteredProducts() {
+            if (this.sortedProducts.length) {
+                return this.sortedProducts;
+            } else {
+                return this.PRODUCTS;
+            }
+        }  
     },
     methods: {
         ...mapActions([
@@ -42,8 +62,19 @@ export default {
         ]),
         addToCart(data) {
             this.ADD_TO_CART(data);
-        }
+        },
+         sortByCategories(category) {
+            this.sortedProducts = [];
+            let select = this;
+            this.PRODUCTS.map(function (item) {
+                if (category.name === item.category) {
+                    select.sortedProducts.push(item);
+                }
+            });
+            this.selected = category.name;
+        },
     },
+   
     mounted() {
         this.GET_PRODUCTS_FROM_API()
     }

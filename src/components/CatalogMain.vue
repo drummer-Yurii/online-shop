@@ -1,5 +1,9 @@
 <template>
     <div class="catalog">
+        <router-link :to="{name: 'cart'}">
+            <div class="catalog__link">Cart: {{ CART.length }}</div>
+        </router-link>
+        
         <h1>Catalog</h1>
         <div class="catalog__list">
             <catalog-item 
@@ -27,7 +31,8 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'PRODUCTS'
+            'PRODUCTS',
+            'CART'
         ])
     },
     methods: {
@@ -54,6 +59,14 @@ export default {
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
+    }
+    &__link {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: $padding*2;
+        border: 1px solid #ddd;
+        cursor: pointer;
     }
 }
 </style>

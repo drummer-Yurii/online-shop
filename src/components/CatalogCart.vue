@@ -1,39 +1,39 @@
 <template>
     <div class="catalog-cart">
         <h1>Cart</h1>
-        <catalog-cart-item 
+        <!-- <catalog-cart-item 
             v-for="(item, index) in cart_data"
             :key="item.article"
             :cart_item_data="item"
             @deleteFromCart="deleteFromCart(index)"
-        />
+        /> -->
     </div>
 </template>
 
 <script>
-import CatalogCartItem from './CatalogCartItem.vue';
-import { mapActions } from 'vuex';
+// import CatalogCartItem from './CatalogCartItem.vue';
+// import { mapActions } from 'vuex';
 export default {
     name: 'CatalogCart',
-    components: {
-        CatalogCartItem
-    },
-    props: {
-        cart_data: {
-            type: Array,
-            default() {
-                return []
-            }
-        }
-    },
-    methods: {
-        ...mapActions([
-            'DELETE_FROM_CART'
-        ]),
-        deleteFromCart(index) {
-            this.DELETE_FROM_CART(index)
-        }
-    }
+    // components: {
+    //     CatalogCartItem
+    // },
+    // props: {
+    //     cart_data: {
+    //         type: Array,
+    //         default() {
+    //             return []
+    //         }
+    //     }
+    // },
+    // methods: {
+    //     ...mapActions([
+    //         'DELETE_FROM_CART'
+    //     ]),
+    //     deleteFromCart(index) {
+    //         this.DELETE_FROM_CART(index)
+    //     }
+    // }
 }
 </script>
 

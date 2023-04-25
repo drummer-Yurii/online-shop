@@ -7,11 +7,14 @@
         <catalog-notification 
             :messages="messages"
         />
-        <catalog-select 
-            :options="categories"
-            :selected="selected"
-            @select="sortByCategories"
-        />
+        <div class="catalog__filters">
+            <catalog-select 
+                :options="categories"
+                :selected="selected"
+                @select="sortByCategories"
+            />
+            <catalog-search />
+        </div>
         <div class="catalog__list">
             <catalog-item 
                 v-for="product in filteredProducts"
@@ -27,13 +30,15 @@
 import CatalogItem from './CatalogItem.vue';
 import CatalogSelect from './CatalogSelect.vue';
 import CatalogNotification from '../notifications/CatalogNotification.vue';
+import CatalogSearch from './CatalogSearch.vue';
 import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'CatalogMain',
     components: {
         CatalogItem,
         CatalogSelect,
-        CatalogNotification
+        CatalogNotification,
+        CatalogSearch
     },
     data() {
         return {
@@ -50,7 +55,8 @@ export default {
     computed: {
         ...mapGetters([
             'PRODUCTS',
-            'CART'
+            'CART',
+            'SEARCH_QUERY'
         ]),
         filteredProducts() {
             if (this.sortedProducts.length) {
@@ -82,10 +88,29 @@ export default {
             });
             this.selected = category.name;
         },
+
+        filteredByName(value) {
+            this.sortedProducts = [...this.PRODUCTS];
+            this.selected = 'All';
+            if (value) {
+                this.sortedProducts = this.sortedProducts.filter(function(item) {
+                    return item.name.toLowerCase().includes(value.toLowerCase())
+                })
+            } else {
+                this.sortedProducts = this.PRODUCTS;
+            }
+        }
     },
+
+    watch: {
+        SEARCH_QUERY() {
+            this.filteredByName(this.SEARCH_QUERY)
+        }
+    },  
    
     mounted() {
-        this.GET_PRODUCTS_FROM_API()
+        this.GET_PRODUCTS_FROM_API();
+        this.filteredByName(this.SEARCH_QUERY)
     }
 }
 </script>
@@ -107,6 +132,12 @@ export default {
         padding: $padding*2;
         border: 1px solid #ddd;
         cursor: pointer;
+    }
+    &__filters {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
     }
 }
 </style>
